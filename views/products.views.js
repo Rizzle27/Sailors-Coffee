@@ -12,16 +12,31 @@ function createErrorPage(error) {
     ${headDefaults}
     <title>Sailor's Coffee | Error</title>
     </head>`;
-    html += `<body>`;
+    html += `<body class="d-flex flex-column h-100">`;
+    html += `<main class="flex-shrink-0">`;
     html += 
     `<section class="d-flex flex-column gap-3 justify-content-center mx-auto text-center py-5">
-        <h2>Se produjo un error</h2>
+        <h2 class="rafginsFont">Se produjo un error</h2>
         <h3>${error}</h3>
         <div class="py-2 px-3 rounded-pill mx-auto" style="background-color: #E1D7D0;">
             <a class="text-dark text-decoration-none" href="/">Volver al Inicio</a>
         </div>
     </section>`;
     html += `</body>`;
+    html += `</main>`;
+    html += `<footer class="d-flex justify-content-around align-items-center text-center footer mt-auto py-3" style="background-color: #E1D7D0;">`
+    html +=
+    `<div class="col-4">
+        <p class="m-0">Aplicaciones Híbridas | Gacía, Agüero, Stella</p>
+    </div>
+    <div class="col-4">
+        <h2 class="rafginsFont m-0">Sailor's Coffee</h2>
+    </div>
+    <div class="d-flex justify-content-center col-4 gap-5">
+        <a href="https://www.whatsapp.com/"><img src="../images/wsp.png" alt="Logo de WhatsApp"></a>
+        <a href="https://www.instagram.com/"><img src="../images/ig.png" alt="Logo de Instagram"></a>
+    </div>`;
+    html += `</footer>`;
     return html;
 }
 
@@ -32,12 +47,13 @@ function createProductsListPage(products, type) {
     ${headDefaults}
     <title>Sailor's Coffee | ${type ? TITLES_BY_TYPES.find((item) => item.type === type).type.toLocaleUpperCase() : 'Productos'}</title>
     </head>`;
-    html += `<body>`;
+    html += `<body class="d-flex flex-column h-100">`;
+    html += `<main class="flex-shrink-0">`;
     html += `<section id="intro-section" class="pb-5">`;
     html += 
     `<nav class="mx-auto d-flex justify-content-between col-10 align-items-center py-4">
         <div>
-            <h1 class="fs-4"><a href="/" class="text-light text-decoration-none">Sailor's Coffee</a></h1>
+            <h1 class="rafginsFont fs-3 m-0"><a href="/" class="text-light text-decoration-none">Sailor's Coffee</a></h1>
         </div>
         <div>
             <ul class="d-flex gap-5 m-0 list-unstyled">
@@ -48,13 +64,12 @@ function createProductsListPage(products, type) {
                 <li><a href="/productos/type/tortas" class="text-light text-decoration-none">Tortas</a></li>
                 <li><a href="/productos/type/cookies" class="text-light text-decoration-none">Cookies</a></li>
                 <li><a href="/productos/type/bebidas" class="text-light text-decoration-none">Bebidas</a></li>
-                <li><a href="/admin/dashboard" class="text-light text-decoration-none">Admin</a></li>
             </ul>
         </div>
     </nav>`;
     html += 
     `<section class="d-flex flex-column justify-content-center text-center text-light py-5">
-        <h2 style="font-size: 5rem;">${type ? TITLES_BY_TYPES.find((item) => item.type === type).title : 'Nuestros Productos'}</h2>
+        <h2 class="rafginsFont" style="font-size: 5rem;">${type ? TITLES_BY_TYPES.find((item) => item.type === type).title : 'Nuestros Productos'}</h2>
         <div class="w-75 my-4 mx-auto">
             <p>${type ? TITLES_BY_TYPES.find((item) => item.type === type).description : `En Sailor's Coffee, te invitamos a sumergirte en un mundo de sabores y opciones. Nuestra sección con todos los productos es el lugar perfecto para comenzar tu viaje culinario por nuestra tienda.`}</p>
         </div>
@@ -69,7 +84,7 @@ function createProductsListPage(products, type) {
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <h5 class="card-title">${product.name}</h5>
-                    <p>${product.price.toLocaleString("en-US", {style: "currency", currency: "USD",})}</p>
+                    <p>$${product.price}</p>
                 </div>
                 <p>${product.description}</p>
                 <p>${product.size}</p>
@@ -87,11 +102,29 @@ function createProductsListPage(products, type) {
             <a class="fs-1 text-dark text-decoration-none" href="/productos/nuevo">+</a>
         </div>
     </div>`;
-    html += `<a href="/productos/nuevo"`
     html += `</section>`;
+    html += `</main>`;
+    html += `<footer class="d-flex justify-content-around align-items-center text-center footer mt-auto py-3" style="background-color: #E1D7D0;">`
+    html +=
+    `<div class="col-4">
+        <p class="m-0">Aplicaciones Híbridas | Gacía, Agüero, Stella</p>
+    </div>
+    <div class="col-4">
+        <h2 class="rafginsFont m-0">Sailor's Coffee</h2>
+    </div>
+    <div class="d-flex justify-content-center col-4 gap-5">`;
+    if (type != undefined) {
+        html += `<a href="https://www.whatsapp.com/"><img src="../../images/wsp.png" alt="Logo de WhatsApp"></a>`;
+        html += `<a href="https://www.instagram.com/"><img src="../../images/ig.png" alt="Logo de Instagram"></a>`;
+    } else {
+        html += `<a href="https://www.whatsapp.com/"><img src="../images/wsp.png" alt="Logo de WhatsApp"></a>`;
+        html += `<a href="https://www.instagram.com/"><img src="../images/ig.png" alt="Logo de Instagram"></a>`;
+    };
+    html += `</div>`;
+    html += `</footer>`;
     html += `</body>`;
     return html;
-}
+};
 
 function createDetailedPage(product) {
     let html = "";
@@ -100,12 +133,13 @@ function createDetailedPage(product) {
     ${headDefaults}
     <title>Sailor's Coffee | ${product.name}</title>
     </head>`;
-    html += `<body>`;
+    html += `<body class="d-flex flex-column h-100">`;
+    html += `<main class="flex-shrink-0">`;
     html += `<section class="mb-5" style="background-color: #E1D7D0;">`;
     html += 
     `<nav class="mx-auto d-flex justify-content-between col-10 align-items-center py-4">
         <div>
-            <h1 class="fs-4"><a href="/" class="text-dark text-decoration-none">Sailor's Coffee</a></h1>
+            <h1 class="rafginsFont fs-3 m-0"><a href="/" class="text-dark text-decoration-none">Sailor's Coffee</a></h1>
         </div>
         <div>
             <ul class="d-flex gap-5 m-0 list-unstyled">
@@ -116,7 +150,6 @@ function createDetailedPage(product) {
                 <li><a href="/productos/type/tortas" class="text-dark text-decoration-none">Tortas</a></li>
                 <li><a href="/productos/type/cookies" class="text-dark text-decoration-none">Cookies</a></li>
                 <li><a href="/productos/type/bebidas" class="text-dark text-decoration-none">Bebidas</a></li>
-                <li><a href="/admin/dashboard" class="text-dark text-decoration-none">Admin</a></li>
             </ul>
         </div>
     </nav>`;
@@ -128,7 +161,7 @@ function createDetailedPage(product) {
         <img class="rounded-circle" src="/images/products/${product.image}" alt="Foto del producto ${product.name}" width="320">
     </div>
     <div class="col-7 text-start">
-        <h2 class="fs-1">${product.name}</h2>
+        <h2 class="rafginsFont fs-1">${product.name}</h2>
         <p class="fs-5">${product.description}</p>
         <p class="fs-5">${product.size}</p>
         <div>
@@ -140,7 +173,21 @@ function createDetailedPage(product) {
     html += `<section class="d-flex justify-content-between align-items-center col-10 mx-auto">`;
     html += `<h2>Producto no encontrado</h2>`;
     html += `</section>`;
-    }
+    };
+    html += `</main>`;
+    html += `<footer class="d-flex justify-content-around align-items-center text-center footer mt-auto py-3" style="background-color: #E1D7D0;">`
+    html +=
+    `<div class="col-4">
+        <p class="m-0">Aplicaciones Híbridas | Gacía, Agüero, Stella</p>
+    </div>
+    <div class="col-4">
+        <h2 class="rafginsFont m-0">Sailor's Coffee</h2>
+    </div>
+    <div class="d-flex justify-content-center col-4 gap-5">
+        <a href="https://www.whatsapp.com/"><img src="../images/wsp.png" alt="Logo de WhatsApp"></a>
+        <a href="https://www.instagram.com/"><img src="../images/ig.png" alt="Logo de Instagram"></a>
+    </div>`;
+    html += `</footer>`;
     html += `</body>`;
     return html;
 }
@@ -152,12 +199,13 @@ function createForm() {
     ${headDefaults}
     <title>Sailor's Coffee | Crear Producto</title>
     </head>`;
-    html += `<body>`;
+    html += `<body class="d-flex flex-column h-100">`;
+    html += `<main class="flex-shrink-0">`;
     html += `<section class="mb-5" style="background-color: #E1D7D0;">`;
     html += 
     `<nav class="mx-auto d-flex justify-content-between col-10 align-items-center py-4">
         <div>
-            <h1 class="fs-4"><a href="/" class="text-dark text-decoration-none">Sailor's Coffee</a></h1>
+            <h1 class="rafginsFont fs-3 m-0"><a href="/" class="text-dark text-decoration-none">Sailor's Coffee</a></h1>
         </div>
         <div>
             <ul class="d-flex gap-5 m-0 list-unstyled">
@@ -168,14 +216,13 @@ function createForm() {
                 <li><a href="/productos/type/tortas" class="text-dark text-decoration-none">Tortas</a></li>
                 <li><a href="/productos/type/cookies" class="text-dark text-decoration-none">Cookies</a></li>
                 <li><a href="/productos/type/bebidas" class="text-dark text-decoration-none">Bebidas</a></li>
-                <li><a href="/admin/dashboard" class="text-dark text-decoration-none">Admin</a></li>
             </ul>
         </div>
     </nav>`;
     html += `</section>`;
     html += 
     `<section class="d-flex flex-column justift-content-center mx-auto col-10">
-        <h2 class="text-center mb-4">Crear un Nuevo Producto</h2>
+        <h2 class="rafginsFont text-center mb-4">Crear un Nuevo Producto</h2>
         <form action="/productos/nuevo" method="POST" class="d-flex flex-column col-6 mx-auto">
             <input class="form-control" type="text" id="name" name="name" placeholder="Nombre" required><br>
 
@@ -210,7 +257,21 @@ function createForm() {
 
             <button class="btn my-3" type="submit" style="background-color: #E1D7D0;">Crear</button>
         </form>
-    </section>`
+    </section>`;
+    html += `</main>`;
+    html += `<footer class="d-flex justify-content-around align-items-center text-center footer mt-auto py-3" style="background-color: #E1D7D0;">`
+    html +=
+    `<div class="col-4">
+        <p class="m-0">Aplicaciones Híbridas | Gacía, Agüero, Stella</p>
+    </div>
+    <div class="col-4">
+        <h2 class="rafginsFont m-0">Sailor's Coffee</h2>
+    </div>
+    <div class="d-flex justify-content-center col-4 gap-5">
+        <a href="https://www.whatsapp.com/"><img src="../images/wsp.png" alt="Logo de WhatsApp"></a>
+        <a href="https://www.instagram.com/"><img src="../images/ig.png" alt="Logo de Instagram"></a>
+    </div>`;
+    html += `</footer>`;
     html += `</body>`;
     return html;
 }
@@ -222,12 +283,13 @@ function editForm(product) {
     ${headDefaults}
     <title>Sailor's Coffee | Editar Producto</title>
     </head>`;
-    html += `<body>`;
+    html += `<body class="d-flex flex-column h-100">`;
+    html += `<main class="flex-shrink-0">`;
     html += `<section class="mb-5" style="background-color: #E1D7D0;">`;
     html += 
     `<nav class="mx-auto d-flex justify-content-between col-10 align-items-center py-4">
         <div>
-            <h1 class="fs-4"><a href="/" class="text-dark text-decoration-none">Sailor's Coffee</a></h1>
+            <h1 class="rafginsFont fs-3 m-0"><a href="/" class="text-dark text-decoration-none">Sailor's Coffee</a></h1>
         </div>
         <div>
             <ul class="d-flex gap-5 m-0 list-unstyled">
@@ -238,14 +300,13 @@ function editForm(product) {
                 <li><a href="/productos/type/tortas" class="text-dark text-decoration-none">Tortas</a></li>
                 <li><a href="/productos/type/cookies" class="text-dark text-decoration-none">Cookies</a></li>
                 <li><a href="/productos/type/bebidas" class="text-dark text-decoration-none">Bebidas</a></li>
-                <li><a href="/admin/dashboard" class="text-dark text-decoration-none">Admin</a></li>
             </ul>
         </div>
     </nav>`;
     html += `</section>`;
     html += 
     `<section class="d-flex flex-column justift-content-center mx-auto col-10">
-        <h2 class="text-center mb-4">Editar un Producto</h2>
+        <h2 class="rafginsFont text-center mb-4">Editar un Producto</h2>
         <form action="/productos/editar/${product._id}" method="POST" class="d-flex flex-column col-6 mx-auto">
             <input class="form-control" type="text" id="name" name="name" placeholder="Nombre" value="${product.name}"><br>
 
@@ -280,7 +341,21 @@ function editForm(product) {
 
             <button class="btn my-3" type="submit" style="background-color: #E1D7D0;">Editar</button>
         </form>
-    </section>`
+    </section>`;
+    html += `</main>`;
+    html += `<footer class="d-flex justify-content-around align-items-center text-center footer mt-auto py-3" style="background-color: #E1D7D0;">`
+    html +=
+    `<div class="col-4">
+        <p class="m-0">Aplicaciones Híbridas | Gacía, Agüero, Stella</p>
+    </div>
+    <div class="col-4">
+        <h2 class="rafginsFont m-0">Sailor's Coffee</h2>
+    </div>
+    <div class="d-flex justify-content-center col-4 gap-5">
+        <a href="https://www.whatsapp.com/"><img src="../../images/wsp.png" alt="Logo de WhatsApp"></a>
+        <a href="https://www.instagram.com/"><img src="../../images/ig.png" alt="Logo de Instagram"></a>
+    </div>`;
+    html += `</footer>`;
     html += `</body>`;
     return html;
 }
@@ -292,12 +367,13 @@ function deleteForm(product) {
     ${headDefaults}
     <title>Sailor's Coffee | Editar Producto</title>
     </head>`;
-    html += `<body>`;
+    html += `<body class="d-flex flex-column h-100">`;
+    html += `<main class="flex-shrink-0">`;
     html += `<section class="mb-5" style="background-color: #E1D7D0;">`;
     html += 
     `<nav class="mx-auto d-flex justify-content-between col-10 align-items-center py-4">
         <div>
-            <h1 class="fs-4"><a href="/" class="text-dark text-decoration-none">Sailor's Coffee</a></h1>
+            <h1 class="rafginsFont fs-3 m-0"><a href="/" class="text-dark text-decoration-none">Sailor's Coffee</a></h1>
         </div>
         <div>
             <ul class="d-flex gap-5 m-0 list-unstyled">
@@ -308,13 +384,12 @@ function deleteForm(product) {
                 <li><a href="/productos/type/tortas" class="text-dark text-decoration-none">Tortas</a></li>
                 <li><a href="/productos/type/cookies" class="text-dark text-decoration-none">Cookies</a></li>
                 <li><a href="/productos/type/bebidas" class="text-dark text-decoration-none">Bebidas</a></li>
-                <li><a href="/admin/dashboard" class="text-dark text-decoration-none">Admin</a></li>
             </ul>
         </div>
     </nav>`;
     html += `</section>`;
     html += `<section class="d-flex flex-column justift-content-center mx-auto col-10">`
-    html += `<h2 class="text-center mb-4">Eliminar un Producto</h2>`
+    html += `<h2 class="rafginsFont text-center mb-4">Eliminar un Producto</h2>`
     html += `<form action="/productos/eliminar/${product._id}" method="POST" class="d-flex flex-column col-12 mx-auto">`
     html += `<section class="d-flex justify-content-between align-items-center col-12 mx-auto">`;
     html += 
@@ -333,6 +408,20 @@ function deleteForm(product) {
     html += `</section>`;
     html += `</form>`;
     html += `</section>`;
+    html += `</main>`;
+    html += `<footer class="d-flex justify-content-around align-items-center text-center footer mt-auto py-3" style="background-color: #E1D7D0;">`
+    html +=
+    `<div class="col-4">
+        <p class="m-0">Aplicaciones Híbridas | Gacía, Agüero, Stella</p>
+    </div>
+    <div class="col-4">
+        <h2 class="rafginsFont m-0">Sailor's Coffee</h2>
+    </div>
+    <div class="d-flex justify-content-center col-4 gap-5">
+        <a href="https://www.whatsapp.com/"><img src="../../images/wsp.png" alt="Logo de WhatsApp"></a>
+        <a href="https://www.instagram.com/"><img src="../../images/ig.png" alt="Logo de Instagram"></a>
+    </div>`;
+    html += `</footer>`;
     html += `</body>`;
     return html;
 }

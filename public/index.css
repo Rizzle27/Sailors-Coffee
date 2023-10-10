@@ -1,3 +1,12 @@
+@font-face {
+  font-family: 'rafgins';
+  src: url('./fonts/rafginsregular-51zmb.ttf') format('truetype');
+}
+
+.rafginsFont {
+  font-family: "rafgins";
+}
+
 #intro-section {
   width: 100%;
   background-image: url("images/bakeryproducts.jpg");

@@ -101,7 +101,7 @@ const deleteProductForm = (req, res) => {
 const deleteProduct = (req, res) => {
     const id = req.params.id;
     productsService.deleteProduct(id)
-        .then((deletedProduct) => {
+        .then(() => {
             res.redirect("/productos");
         })
         .catch((error) => {
