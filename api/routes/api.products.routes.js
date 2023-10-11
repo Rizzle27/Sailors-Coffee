@@ -8,6 +8,10 @@ route.get("/productos/:id", controller.getProductsById);
 
 route.post("/productos", controller.createProduct);
 
+route.put('/productos/:id', controller.replaceProduct);
+
+route.patch('/productos/:id', controller.updateProduct);
+
 route.delete("/productos/:id", controller.deleteProduct);
 
 export default route;

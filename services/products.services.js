@@ -51,9 +51,14 @@ const editProduct = async (id, product) => {
   return editedProduct;
 };
 
+const replaceProduct = async (id, product) => {
+  const editedProduct = await db.collection("products").replaceOne({ _id: new ObjectId(id) }, product);
+  return editedProduct;
+};
+
 const deleteProduct = async (id) => {
   const deletedProduct = await db.collection("products").deleteOne({ _id: new ObjectId(id) });
   return deletedProduct;
 }
 
-export { getProducts, getProductsByType, getProductById, createProduct, editProduct, deleteProduct };
+export { getProducts, getProductsByType, getProductById, createProduct, editProduct, replaceProduct, deleteProduct };
